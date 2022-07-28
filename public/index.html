@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <div>
+    <div>
+      <h3 id="isSignerConnected">Signer connected?: </h3>
+      <button onclick="connectToSigner()">Connect To Signer</button>
+      <h3 id="connectedAccount">Connected Account: </h3>
+      <br>
+      <button onclick="mint()">Mint</button>
+      <form id="transferForm">
+        <label for="tokenIdField">Token Id</label>
+        <input id="tokenIdField" name="tokenIdField" type="number">
+        <label for="transferToField">Transfer to</label>
+        <input id="transferToField" name="transferToField" type="text">
+      </form>
+      <button onclick="transfer()">Transfer</button>
+
+      <form id="balanceOfForm">
+        <input id="balanceOfField" type="text">
+      </form>
+      <button onclick="balanceOf()">Balance Of</button>
+
+      <form id="ownerOfForm">
+        <input id="ownerOfField" type="number">
+      </form>
+      <button onclick="ownerOf()">Owner Of</button>
+
+      <button onclick="totalMinted()">Total Minted</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="casper-js-sdk.js"></script>
+  <script src="index.js"></script>
+</body>
