@@ -26,7 +26,6 @@ export class CEP78 {
   async installContract() {
     return new Promise((resolve, reject) => {
 
-      const zero = new Some(CLValueBuilder.u8(0))
       const schema = {
         "properties": {
           "first_name": {
@@ -46,9 +45,9 @@ export class CEP78 {
         "collection_name": CLValueBuilder.string(this.collection_name),
         "collection_symbol": CLValueBuilder.string(this.collection_symbol),
         "total_token_supply": CLValueBuilder.u64(1000),
-        "ownership_mode": CLValueBuilder.u8(2),
-        "nft_kind": CLValueBuilder.u8(1),
-        "holder_mode": CLValueBuilder.option(zero),
+        "ownership_mode": CLValueBuilder.u8(2), // Transferable
+        "nft_kind": CLValueBuilder.u8(1), // Digital
+        "holder_mode": CLValueBuilder.u8(0), // 
         "nft_metadata_kind": CLValueBuilder.u8(3),
         "json_schema": CLValueBuilder.string(JSON.stringify(schema)),
         "identifier_mode": CLValueBuilder.u8(0),
@@ -260,7 +259,7 @@ export class CEP78 {
 async function test() {
   const cep78 = new CEP78()
   try {
-    const nftRecipient = fs.readFileSync("recipient/public_key_hex").toString()
+    const nftRecipient = Keys.Ed25519.loadKeyPairFromPrivateFile("recipient/secret_key.pem").publicKey.toHex()
 
     console.log("New CEP78 Installation. Contract hash: ", await cep78.installContract())
     console.log("New mint executed. ", await cep78.mint())
@@ -273,4 +272,4 @@ async function test() {
   }
 }
 
-//test()
+test()
